@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Client] Assessment Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; display: flex; height: 100vh; overflow: hidden; background: #f8f8f8; }
+
+        /* === BRAND COLORS - CUSTOMIZE THESE === */
+        :root {
+            --sidebar-bg: #1a1a2e;
+            --sidebar-border: #2a2a3e;
+            --primary: #3D1A54;      /* Main brand color */
+            --accent: #E91E63;        /* Accent/highlight */
+            --secondary: #4A6CF7;     /* Secondary accent */
+            --success: #16A34A;       /* Success/live indicators */
+        }
+
+        .sidebar {
+            width: 260px;
+            min-width: 260px;
+            background: var(--sidebar-bg);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--sidebar-border);
+        }
+
+        .sidebar-header {
+            padding: 24px 20px 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .sidebar-logo .client-name {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: #fff;
+        }
+
+        .sidebar-header h1 {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 4px;
+        }
+
+        .sidebar-header p {
+            font-size: 11px;
+            color: rgba(255,255,255,0.25);
+        }
+
+        .sidebar-nav {
+            padding: 12px 0;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .nav-section {
+            padding: 0 12px;
+            margin-bottom: 8px;
+        }
+
+        .nav-section-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: rgba(255,255,255,0.25);
+            padding: 12px 8px 6px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: rgba(255,255,255,0.6);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .nav-item:hover {
+            background: rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.9);
+        }
+
+        .nav-item.active {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        .nav-item .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .nav-item .meta {
+            font-size: 11px;
+            color: rgba(255,255,255,0.3);
+            margin-left: auto;
+        }
+
+        .nav-item .meta.live {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .nav-item .meta.new {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .sidebar-footer {
+            padding: 16px 20px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            font-size: 11px;
+            color: rgba(255,255,255,0.25);
+        }
+
+        .viewport {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+        }
+
+        .viewport-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 16px;
+            background: #f5f5f5;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .toolbar-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .toolbar-dots span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+        }
+
+        .toolbar-dots span:nth-child(1) { background: #ff5f57; }
+        .toolbar-dots span:nth-child(2) { background: #ffbd2e; }
+        .toolbar-dots span:nth-child(3) { background: #28ca42; }
+
+        .url-bar {
+            flex: 1;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 13px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .url-bar .lock {
+            color: #28ca42;
+        }
+
+        .toolbar-btn {
+            background: none;
+            border: none;
+            padding: 6px;
+            cursor: pointer;
+            color: #666;
+            border-radius: 4px;
+        }
+
+        .toolbar-btn:hover {
+            background: #e5e5e5;
+        }
+
+        .viewport iframe {
+            flex: 1;
+            border: none;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <span class="client-name">[Client Name]</span>
+            </div>
+            <h1>Assessment Portal</h1>
+            <p>Published: [Month Year]</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <!-- STRATEGY SECTION -->
+            <div class="nav-section">
+                <div class="nav-section-label">Strategy</div>
+                <div class="nav-item" onclick="navigate('../canvas.html', 'Business Canvas', this)">
+                    <span class="dot" style="background: linear-gradient(135deg, var(--accent), var(--primary));"></span>
+                    Business Canvas
+                    <span class="meta">Full</span>
+                </div>
+                <div class="nav-item" onclick="navigate('../competitors.html', 'Competitor Analysis', this)">
+                    <span class="dot" style="background: #666;"></span>
+                    Competitors
+                    <span class="meta">3</span>
+                </div>
+                <div class="nav-item" onclick="navigate('../concepts.html', 'Concept Ideas', this)">
+                    <span class="dot" style="background: linear-gradient(135deg, var(--accent), var(--secondary), var(--primary));"></span>
+                    Concept Ideas
+                    <span class="meta">8</span>
+                </div>
+            </div>
+
+            <!-- MEETING SECTION -->
+            <div class="nav-section">
+                <div class="nav-section-label">Meeting</div>
+                <div class="nav-item" onclick="navigate('../agenda.html', 'Meeting Agenda', this)">
+                    <span class="dot" style="background: var(--primary);"></span>
+                    Agenda
+                    <span class="meta">5</span>
+                </div>
+                <div class="nav-item" onclick="navigate('../notes.html', 'Meeting Notes', this)">
+                    <span class="dot" style="background: var(--success);"></span>
+                    Notes & Decisions
+                    <span class="meta live">live</span>
+                </div>
+            </div>
+
+            <!-- RESEARCH SECTION -->
+            <div class="nav-section">
+                <div class="nav-section-label">Research</div>
+                <div class="nav-item" onclick="navigate('../research.html', 'Market Research', this)">
+                    <span class="dot" style="background: var(--primary);"></span>
+                    Market Research
+                    <span class="meta">12</span>
+                </div>
+            </div>
+
+            <!-- MOCKUPS SECTION -->
+            <div class="nav-section">
+                <div class="nav-section-label">Landing Page Mock-ups</div>
+                <div class="nav-item active" onclick="navigate('../index.html', 'Consumer Landing', this)">
+                    <span class="dot" style="background: var(--accent);"></span>
+                    Consumer
+                    <span class="meta">DA</span>
+                </div>
+                <div class="nav-item" onclick="navigate('../b2b.html', 'B2B Landing', this)">
+                    <span class="dot" style="background: var(--primary);"></span>
+                    B2B
+                    <span class="meta new">NEW</span>
+                </div>
+            </div>
+
+            <!-- EXTERNAL SITES SECTION -->
+            <div class="nav-section">
+                <div class="nav-section-label">Current Sites</div>
+                <div class="nav-item" onclick="navigateExternal('https://example.com', this)">
+                    <span class="dot" style="background: var(--accent);"></span>
+                    example.com
+                    <span class="meta live">live</span>
+                </div>
+            </div>
+
+            <!-- COMPETITOR SITES SECTION -->
+            <div class="nav-section">
+                <div class="nav-section-label">Competitor Sites</div>
+                <div class="nav-item" onclick="navigateExternal('https://competitor1.com', this)">
+                    <span class="dot" style="background: #666;"></span>
+                    competitor1.com
+                    <span class="meta live">live</span>
+                </div>
+                <div class="nav-item" onclick="navigateExternal('https://competitor2.com', this)">
+                    <span class="dot" style="background: #666;"></span>
+                    competitor2.com
+                    <span class="meta live">live</span>
+                </div>
+            </div>
+        </nav>
+
+        <div class="sidebar-footer">
+            Assessment Materials
+        </div>
+    </aside>
+
+    <main class="viewport">
+        <div class="viewport-toolbar">
+            <div class="toolbar-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="url-bar">
+                <span class="lock">🔒</span>
+                <span id="url-display">Consumer Landing</span>
+            </div>
+            <button class="toolbar-btn" onclick="document.getElementById('viewport-frame').contentWindow.location.reload()">↻</button>
+        </div>
+        <iframe id="viewport-frame" src="../index.html"></iframe>
+    </main>
+
+    <script>
+        function navigate(file, title, el) {
+            document.getElementById('viewport-frame').src = file;
+            document.getElementById('url-display').textContent = title;
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function navigateExternal(url, el) {
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>

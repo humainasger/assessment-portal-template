@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept Ideas - [Client] Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3D1A54;
+            --accent: #E91E63;
+            --secondary: #4A6CF7;
+            --success: #16A34A;
+            --warning: #F59E0B;
+            --text: #1a1a1a;
+            --text-muted: #666;
+            --bg: #f8f8f8;
+            --card-bg: #ffffff;
+            
+            /* Lane colors - customize per client */
+            --lane-1: #C41230;  /* e.g., Consumer */
+            --lane-2: #3D1A54;  /* e.g., B2B */
+            --lane-3: #4A6CF7;  /* e.g., Enterprise/Government */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: 40px;
+        }
+
+        .header {
+            max-width: 1200px;
+            margin: 0 auto 32px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: var(--text-muted);
+        }
+
+        /* Lane filters */
+        .lane-filters {
+            max-width: 1200px;
+            margin: 0 auto 24px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .lane-filter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .lane-filter:hover {
+            border-color: var(--primary);
+        }
+
+        .lane-filter.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .lane-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        /* Concepts grid */
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .concept-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .concept-lane {
+            height: 4px;
+        }
+
+        .concept-lane.lane-1 { background: var(--lane-1); }
+        .concept-lane.lane-2 { background: var(--lane-2); }
+        .concept-lane.lane-3 { background: var(--lane-3); }
+
+        .concept-body {
+            padding: 20px;
+        }
+
+        .concept-number {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .concept-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .concept-description {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .concept-meta {
+            display: flex;
+            gap: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--bg);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .meta-item .icon {
+            font-size: 14px;
+        }
+
+        .effort-low { color: var(--success); }
+        .effort-medium { color: var(--warning); }
+        .effort-high { color: var(--accent); }
+
+        .impact-high { color: var(--success); }
+        .impact-medium { color: var(--warning); }
+        .impact-low { color: var(--text-muted); }
+
+        /* Priority badge */
+        .priority-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--success);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .concept-card {
+            position: relative;
+        }
+
+        /* Template notice */
+        .template-notice {
+            background: #FEF3C7;
+            border: 1px solid #F59E0B;
+            padding: 16px;
+            text-align: center;
+            font-size: 14px;
+            color: #92400E;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="template-notice">
+        ⚠️ TEMPLATE: Add 8-15 concept ideas. Color-code by strategic lane. Include effort/impact estimates.
+    </div>
+
+    <div class="header">
+        <h1>Concept Ideas</h1>
+        <p>Strategic recommendations across all lanes - [Assessment Date]</p>
+    </div>
+
+    <div class="lane-filters">
+        <div class="lane-filter active">
+            <span class="lane-dot" style="background: linear-gradient(135deg, var(--lane-1), var(--lane-2), var(--lane-3));"></span>
+            All Lanes (8)
+        </div>
+        <div class="lane-filter">
+            <span class="lane-dot" style="background: var(--lane-1);"></span>
+            [Lane 1 Name] (3)
+        </div>
+        <div class="lane-filter">
+            <span class="lane-dot" style="background: var(--lane-2);"></span>
+            [Lane 2 Name] (3)
+        </div>
+        <div class="lane-filter">
+            <span class="lane-dot" style="background: var(--lane-3);"></span>
+            [Lane 3 Name] (2)
+        </div>
+    </div>
+
+    <div class="concepts-grid">
+        <!-- Concept 1 - Quick Win -->
+        <div class="concept-card">
+            <div class="concept-lane lane-1"></div>
+            <span class="priority-badge">Quick Win</span>
+            <div class="concept-body">
+                <div class="concept-number">#1 · [Lane 1 Name]</div>
+                <h3 class="concept-title">[Concept Title]</h3>
+                <p class="concept-description">[One or two sentences describing the concept and its expected benefit.]</p>
+                <div class="concept-meta">
+                    <div class="meta-item">
+                        <span class="icon">⚡</span>
+                        <span class="effort-low">Low effort</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="icon">📈</span>
+                        <span class="impact-high">High impact</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Concept 2 -->
+        <div class="concept-card">
+            <div class="concept-lane lane-1"></div>
+            <div class="concept-body">
+                <div class="concept-number">#2 · [Lane 1 Name]</div>
+                <h3 class="concept-title">[Concept Title]</h3>
+                <p class="concept-description">[One or two sentences describing the concept and its expected benefit.]</p>
+                <div class="concept-meta">
+                    <div class="meta-item">
+                        <span class="icon">⚡</span>
+                        <span class="effort-medium">Medium effort</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="icon">📈</span>
+                        <span class="impact-high">High impact</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Concept 3 -->
+        <div class="concept-card">
+            <div class="concept-lane lane-2"></div>
+            <div class="concept-body">
+                <div class="concept-number">#3 · [Lane 2 Name]</div>
+                <h3 class="concept-title">[Concept Title]</h3>
+                <p class="concept-description">[One or two sentences describing the concept and its expected benefit.]</p>
+                <div class="concept-meta">
+                    <div class="meta-item">
+                        <span class="icon">⚡</span>
+                        <span class="effort-medium">Medium effort</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="icon">📈</span>
+                        <span class="impact-medium">Medium impact</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Concept 4 - Strategic -->
+        <div class="concept-card">
+            <div class="concept-lane lane-2"></div>
+            <span class="priority-badge" style="background: var(--primary);">Strategic</span>
+            <div class="concept-body">
+                <div class="concept-number">#4 · [Lane 2 Name]</div>
+                <h3 class="concept-title">[Concept Title]</h3>
+                <p class="concept-description">[One or two sentences describing the concept and its expected benefit.]</p>
+                <div class="concept-meta">
+                    <div class="meta-item">
+                        <span class="icon">⚡</span>
+                        <span class="effort-high">High effort</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="icon">📈</span>
+                        <span class="impact-high">High impact</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Concept 5 -->
+        <div class="concept-card">
+            <div class="concept-lane lane-3"></div>
+            <div class="concept-body">
+                <div class="concept-number">#5 · [Lane 3 Name]</div>
+                <h3 class="concept-title">[Concept Title]</h3>
+                <p class="concept-description">[One or two sentences describing the concept and its expected benefit.]</p>
+                <div class="concept-meta">
+                    <div class="meta-item">
+                        <span class="icon">⚡</span>
+                        <span class="effort-low">Low effort</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="icon">📈</span>
+                        <span class="impact-medium">Medium impact</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add more concepts as needed -->
+    </div>
+</body>
+</html>

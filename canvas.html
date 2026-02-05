@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Canvas - [Client] Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3D1A54;
+            --accent: #E91E63;
+            --success: #16A34A;
+            --warning: #F59E0B;
+            --text: #1a1a1a;
+            --text-muted: #666;
+            --bg: #f8f8f8;
+            --card-bg: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: 40px;
+        }
+
+        .header {
+            max-width: 1400px;
+            margin: 0 auto 40px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: var(--text-muted);
+        }
+
+        .canvas-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(2, minmax(200px, auto));
+            gap: 16px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .canvas-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .canvas-card h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--bg);
+        }
+
+        .canvas-card ul {
+            list-style: none;
+        }
+
+        .canvas-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--bg);
+            font-size: 14px;
+        }
+
+        .canvas-card li:last-child {
+            border-bottom: none;
+        }
+
+        /* Grid positioning */
+        .key-partners { grid-column: 1; grid-row: 1 / 3; }
+        .key-activities { grid-column: 2; grid-row: 1; }
+        .key-resources { grid-column: 2; grid-row: 2; }
+        .value-prop { grid-column: 3; grid-row: 1 / 3; background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; }
+        .value-prop h3 { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.2); }
+        .customer-relations { grid-column: 4; grid-row: 1; }
+        .channels { grid-column: 4; grid-row: 2; }
+        .customer-segments { grid-column: 5; grid-row: 1 / 3; }
+
+        .cost-structure { grid-column: 1 / 3; }
+        .revenue-streams { grid-column: 3 / 6; }
+
+        .bottom-row {
+            display: grid;
+            grid-template-columns: 2fr 3fr;
+            gap: 16px;
+            max-width: 1400px;
+            margin: 16px auto 0;
+        }
+
+        /* Highlight items */
+        .highlight {
+            background: rgba(233, 30, 99, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin: -4px -8px;
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+            font-weight: 600;
+        }
+
+        .tag.new { background: var(--accent); color: white; }
+        .tag.key { background: var(--primary); color: white; }
+        .tag.risk { background: var(--warning); color: white; }
+
+        /* Template notice */
+        .template-notice {
+            background: #FEF3C7;
+            border: 1px solid #F59E0B;
+            padding: 16px;
+            text-align: center;
+            font-size: 14px;
+            color: #92400E;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            max-width: 1400px;
+            margin: 0 auto 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="template-notice">
+        ⚠️ TEMPLATE: Business Model Canvas - customize each section for client
+    </div>
+
+    <div class="header">
+        <h1>[Client] Business Canvas</h1>
+        <p>Strategic overview - [Assessment Date]</p>
+    </div>
+
+    <div class="canvas-grid">
+        <div class="canvas-card key-partners">
+            <h3>Key Partners</h3>
+            <ul>
+                <li>[Partner 1] <span class="tag key">KEY</span></li>
+                <li>[Partner 2]</li>
+                <li>[Partner 3]</li>
+                <li>[Technology partner]</li>
+                <li>[Distribution partner]</li>
+            </ul>
+        </div>
+
+        <div class="canvas-card key-activities">
+            <h3>Key Activities</h3>
+            <ul>
+                <li>[Core activity 1]</li>
+                <li>[Core activity 2]</li>
+                <li>[Platform/tech development]</li>
+            </ul>
+        </div>
+
+        <div class="canvas-card key-resources">
+            <h3>Key Resources</h3>
+            <ul>
+                <li>[Technology/platform]</li>
+                <li>[Team/expertise]</li>
+                <li>[Data/assets]</li>
+            </ul>
+        </div>
+
+        <div class="canvas-card value-prop">
+            <h3>Value Proposition</h3>
+            <ul>
+                <li class="highlight">[Primary value prop]</li>
+                <li>[Secondary benefit 1]</li>
+                <li>[Secondary benefit 2]</li>
+                <li>[Differentiator vs competitors]</li>
+            </ul>
+        </div>
+
+        <div class="canvas-card customer-relations">
+            <h3>Customer Relationships</h3>
+            <ul>
+                <li>[Self-service/Assisted/etc]</li>
+                <li>[Support model]</li>
+                <li>[Community/engagement]</li>
+            </ul>
+        </div>
+
+        <div class="canvas-card channels">
+            <h3>Channels</h3>
+            <ul>
+                <li>[Primary acquisition channel]</li>
+                <li>[Secondary channel]</li>
+                <li>[Partner channel] <span class="tag new">NEW</span></li>
+            </ul>
+        </div>
+
+        <div class="canvas-card customer-segments">
+            <h3>Customer Segments</h3>
+            <ul>
+                <li class="highlight">[Primary segment]</li>
+                <li>[Secondary segment]</li>
+                <li>[Emerging segment] <span class="tag new">NEW</span></li>
+                <li>[Enterprise/B2B if applicable]</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="bottom-row">
+        <div class="canvas-card cost-structure">
+            <h3>Cost Structure</h3>
+            <ul>
+                <li>[Major cost 1] <span class="tag risk">HIGH</span></li>
+                <li>[Major cost 2]</li>
+                <li>[Operational costs]</li>
+                <li>[Growth/marketing costs]</li>
+            </ul>
+        </div>
+
+        <div class="canvas-card revenue-streams">
+            <h3>Revenue Streams</h3>
+            <ul>
+                <li class="highlight">[Primary revenue model]</li>
+                <li>[Secondary revenue]</li>
+                <li>[Future revenue opportunity] <span class="tag new">POTENTIAL</span></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
