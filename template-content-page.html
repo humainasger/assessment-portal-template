@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Title - Client Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --purple: #3D1A54;
+            --purple-light: #F8F5FB;
+            --accent: #C41230;
+            --text: #1a1a2e;
+            --text-secondary: #555;
+            --text-muted: #999;
+            --border: #e8e8ec;
+            --bg: #fafaf9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* NAV */
+        .topnav {
+            position: fixed; top: 0; left: 0; right: 0; height: 48px;
+            background: rgba(250,250,249,0.92); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; padding: 0 24px; gap: 16px; z-index: 100;
+        }
+        .topnav-brand {
+            font-size: 13px; font-weight: 600; color: var(--text-muted);
+            letter-spacing: -0.2px;
+        }
+        .topnav-links { display: flex; gap: 2px; flex: 1; overflow-x: auto; }
+        .topnav-links::-webkit-scrollbar { display: none; }
+        .topnav-links a {
+            font-size: 13px; font-weight: 500; color: var(--text-muted);
+            text-decoration: none; padding: 6px 12px; border-radius: 6px;
+            white-space: nowrap; transition: all 0.15s;
+        }
+        .topnav-links a:hover { color: var(--text); background: rgba(0,0,0,0.04); }
+        .topnav-links a.active { color: var(--purple); background: var(--purple-light); font-weight: 600; }
+
+        /* CONTENT */
+        .content {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 80px 24px 120px;
+        }
+
+        /* HERO */
+        .hero { margin-bottom: 64px; }
+        .hero-meta {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.15;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+        .hero .subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* SECTIONS */
+        .section { margin-bottom: 72px; }
+        .section-anchor { display: block; position: relative; top: -64px; visibility: hidden; }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+
+        .section-meta {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text);
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+
+        p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        strong { color: var(--text); }
+
+        /* LISTS */
+        ul, ol {
+            padding-left: 20px;
+            margin-bottom: 24px;
+        }
+        li {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+        li strong { color: var(--text); }
+
+        /* CALLOUT */
+        .callout {
+            margin: 32px 0;
+            padding: 20px 24px;
+            border-left: 3px solid var(--accent);
+            background: #fff;
+            border-radius: 0 8px 8px 0;
+        }
+        .callout p { margin-bottom: 0; font-size: 17px; }
+        .callout strong { color: var(--accent); }
+
+        .callout-purple {
+            border-left-color: var(--purple);
+        }
+        .callout-purple strong { color: var(--purple); }
+
+        /* TABLE */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 24px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: #fff;
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 16px; }
+        thead th {
+            padding: 12px 16px; text-align: left;
+            font-weight: 600; font-size: 13px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+        }
+        tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f5f5f5;
+            color: var(--text-secondary);
+        }
+        tbody tr:last-child td { border-bottom: none; }
+
+        /* DIVIDER */
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 48px 0;
+        }
+
+        /* MERMAID */
+        .mermaid-wrap {
+            margin: 32px 0;
+            padding: 24px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        .mermaid-wrap .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ORDERED FLOW */
+        .flow-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 24px 0;
+            counter-reset: flow;
+        }
+        .flow-list li {
+            counter-increment: flow;
+            padding: 12px 0 12px 48px;
+            position: relative;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .flow-list li:last-child { border-bottom: none; }
+        .flow-list li::before {
+            content: counter(flow);
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--purple-light);
+            color: var(--purple);
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 600px) {
+            .content { padding: 64px 16px 80px; }
+            .hero h1 { font-size: 32px; }
+            h2 { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="topnav">
+    <div class="topnav-brand">Page Title</div>
+    <div class="topnav-links">
+        <a href="#s1" class="active">Section 1</a>
+        <a href="#s2">Section 2</a>
+        <a href="#s3">Section 3</a>
+    </div>
+</nav>
+
+<div class="content">
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-meta">Category or Date</div>
+        <h1>Page Title Goes Here</h1>
+        <p class="subtitle">A brief description of what this page covers and why it matters.</p>
+    </div>
+
+    <!-- SECTION 1 -->
+    <div class="section">
+        <span id="s1" class="section-anchor"></span>
+        <h2>1. Section Title</h2>
+        <div class="section-meta">Optional context like time allocation or status</div>
+
+        <p>Introductory paragraph. Keep it concise. One idea per paragraph. Let the reader scan headings and dive into what interests them.</p>
+
+        <h3>Subsection heading</h3>
+
+        <ul>
+            <li><strong>Bold lead-in</strong> -- followed by the explanation or detail</li>
+            <li><strong>Another point</strong> -- keep list items scannable</li>
+            <li><strong>Third point</strong> -- one idea per bullet</li>
+        </ul>
+
+        <div class="callout">
+            <p><strong>Key insight:</strong> Use callouts sparingly for the most important points that need to stand out.</p>
+        </div>
+
+        <h3>A table example</h3>
+
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Column A</th><th>Column B</th><th>Column C</th></tr></thead>
+                <tbody>
+                    <tr><td>Row 1 data</td><td>Status info</td><td>Details</td></tr>
+                    <tr><td>Row 2 data</td><td>Status info</td><td>Details</td></tr>
+                    <tr><td>Row 3 data</td><td>Status info</td><td>Details</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 2 -->
+    <div class="section">
+        <span id="s2" class="section-anchor"></span>
+        <h2>2. Another Section</h2>
+        <div class="section-meta">Context</div>
+
+        <p>More content here. Use mermaid diagrams to visualize relationships, flows, or timelines -- not for decoration.</p>
+
+        <h3>A process flow</h3>
+
+        <ol class="flow-list">
+            <li>First step in the process</li>
+            <li>Second step follows naturally</li>
+            <li>Third step completes the flow</li>
+            <li>Final outcome or result</li>
+        </ol>
+
+        <h3>A relationship diagram</h3>
+
+        <div class="mermaid-wrap">
+            <pre class="mermaid">
+graph LR
+    A["Entity A"] --> B["Entity B"]
+    A --> C["Entity C"]
+    B --> D["Outcome"]
+    C --> D
+
+    style A fill:#3D1A54,stroke:#3D1A54,color:#fff
+    style B fill:#F8F5FB,stroke:#3D1A54,color:#1a1a2e
+    style C fill:#F8F5FB,stroke:#3D1A54,color:#1a1a2e
+    style D fill:#fff5f5,stroke:#C41230,color:#1a1a2e
+            </pre>
+        </div>
+
+        <div class="callout callout-purple">
+            <p><strong>Strategic question:</strong> Purple callouts work well for questions that need discussion or decisions.</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 3 -->
+    <div class="section">
+        <span id="s3" class="section-anchor"></span>
+        <h2>3. Final Section</h2>
+        <div class="section-meta">Context</div>
+
+        <p>Wrap up with next steps, open questions, or action items.</p>
+
+        <ul>
+            <li><strong>Action item one</strong> -- who owns it, when it's due</li>
+            <li><strong>Action item two</strong> -- specifics matter</li>
+            <li><strong>Action item three</strong> -- keep it concrete</li>
+        </ul>
+    </div>
+
+</div>
+
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+            primaryColor: '#F8F5FB',
+            primaryTextColor: '#1a1a2e',
+            primaryBorderColor: '#3D1A54',
+            lineColor: '#3D1A54',
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '14px'
+        }
+    });
+
+    var sections = document.querySelectorAll('.section-anchor');
+    var navLinks = document.querySelectorAll('.topnav-links a');
+    window.addEventListener('scroll', function() {
+        var current = '';
+        sections.forEach(function(s) {
+            if (s.getBoundingClientRect().top <= 80) current = s.id;
+        });
+        navLinks.forEach(function(a) {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -147,50 +147,42 @@ wrangler pages deploy . --project-name=client-assessment
 
 URL: `https://client-assessment.pages.dev/portal`
 
+## Design System
+
+**Read STYLE-GUIDE.md for the full design reference.** Key rules:
+
+1. **18px minimum body text.** No exceptions.
+2. **680px max content width.** Classic readable column.
+3. **No emojis.** Use inline SVG icons (see STYLE-GUIDE.md for library).
+4. **No em dashes.** Use -- (double hyphen).
+5. **Mermaid diagrams** for flows, relationships, timelines. Not decoration.
+6. **Generous whitespace.** 72px between sections, 20px between paragraphs.
+
+Use `template-content-page.html` as the starting point for all new pages. It includes the full CSS, nav, mermaid setup, and examples of every component (callouts, tables, flow lists, diagrams).
+
+The design is inspired by clean editorial layouts (see asger.me/resources for reference). Think article, not dashboard.
+
 ## Content Page Types
 
 ### Business Canvas (`canvas.html`)
 
-Strategic overview with sections:
-- Value proposition
-- Customer segments
-- Key activities
-- Revenue streams
-- Cost structure
-
-Use cards/grid layout. Include charts from `/charts/`.
+Strategic overview. Use the standard template layout with sections, tables, and mermaid diagrams for strategic maps.
 
 ### Competitor Analysis (`competitors.html`)
 
-For each competitor:
-- Screenshot of their site/product
-- Key facts (funding, users, geography)
-- Strengths/weaknesses
-- How client differs
+For each competitor: key facts, strengths/weaknesses, how client differs. Use tables for comparison, callouts for key insights.
 
-### Concepts (`concepts.html`)
+### Meeting Agendas and Notes
 
-Idea cards with:
-- Title and one-liner
-- Which strategic lane it serves
-- Effort/impact estimate
-- Visual mockup if available
+Use the template layout with numbered sections (h2), time allocations in section-meta, and callout boxes for decisions needed. Mermaid diagrams for flows and relationships. Numbered flow-lists for processes.
 
-Color-code by lane (e.g., Consumer=red, B2B=purple, Government=blue).
+### Research Pages
+
+Deep dives on specific topics. Same template, same style. Use h3 subsections within each h2 section. Tables for data. Mermaid for market maps.
 
 ### Landing Page Mockups
 
-Full HTML mockups of proposed pages. These are the "wow" factor - clients see exactly what you're proposing, not wireframes.
-
-### Meeting Notes (`notes.html`)
-
-Update live during the meeting:
-- Decisions made
-- Open questions
-- Action items
-- Quotes worth capturing
-
-Add "live" badge in sidebar to show it's dynamic.
+Full HTML mockups of proposed pages. These are separate from the content template -- they have their own styling to match the proposed design. Move to Archive section in sidebar when no longer current.
 
 ## Tips From DEWA Build
 
